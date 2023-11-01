@@ -1,0 +1,22 @@
+name: Backup Organization Repos
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Schedule the workflow to run daily
+
+jobs:
+  backup:
+    runs-on: self-hosted  # Use the name of your self-hosted runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Backup Script
+        run: |
+          bash your-backup-script.sh
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1  # Change to your desired AWS region
+          ORG_NAME: your-organization-name
