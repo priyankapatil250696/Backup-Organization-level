@@ -12,6 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+
+      - name: Configure AWS Credentials
+        uses: fuller-inc/actions-aws-assume-role@v1
+          with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::123456789012:role/GitHubRepoRole-us-east-1
+     
       - name: Run Backup Script
         run: |
           bash your-backup-script.sh
@@ -20,3 +27,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1  # Change to your desired AWS region
           ORG_NAME: your-organization-name
+
+     
